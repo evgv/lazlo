@@ -1,0 +1,15 @@
+{
+  "name": "lazlo",
+  "version": "0.1.0",
+  "description": "",
+  "main": "src/build/lazlo.js",
+  "repository": "https://github.com/evgv/lazlo.git",
+  "author": "evgv",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^3.0.0",
+    "pump": "^1.0.2",
+  }
+}
