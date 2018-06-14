@@ -1,16 +1,16 @@
 /**
- * lazlo v0.1.0
- * lazlo
- * https://github.com/evgv/lazlo
+ * Lazy Load Image v0.1.0
+ * lli
+ * https://github.com/evgv/lli
  *
- * Copyright 2017 Zubkov Eugene
+ * Copyright 2018 Zubkov Eugene
  * Released under the MIT
  */
 
 /**
  * Example
  * 
- * <img lazlo-src='//www.example.com/images/1.png' class='lazlo-img'/>
+ * <img src="" data-src='//www.example.com/images/image-1.png'/>
  */
 
 /**
@@ -27,7 +27,7 @@
     /**
      * Factory method
      *
-     * @throws {Error}  lazlo.js requires a `window` with a `document` object"
+     * @throws {Error}  lli.js requires a `window` with a `document` object"
      * @param  {object} window
      */
     var factory = function (window) {
@@ -38,27 +38,32 @@
          * Check window object is exist
          */
         if (typeof window.document !== "object") {
-            throw new Error("lazlo.js requires a `window` with a `document` object");
+            throw new Error("lli.js requires a `window` with a `document` object");
         }
 
         /**
          * Main instance
          */
-        var lazlo = function() {
+        var lli = function() {
 
             /**
-             * Load all ll images
+             * Load all images
              *
              * @returns {undefined}
              */
             this._load = function() {
 
-                var self      = this,
-                    imageList = document.getElementsByClassName("lazlo-img");
+                /**
+                 * @type NodeList
+                 */
+                var images = document.querySelectorAll('[data-src]');
+                
+                if (images.length) {
+                    Array.prototype.forEach.call(images, function(image) {    
+                        image.setAttribute("src", image.getAttribute("data-src"));
+                    });
+                }
 
-                Array.prototype.forEach.call(imageList, function(item) {    
-                    item.setAttribute("src", item.getAttribute("lazlo-src"));
-                });
             };
 
             /**
@@ -86,9 +91,9 @@
         /**
          * Initialize object variables
          */
-        lazlo.initialize = function() {
+        lli.initialize = function() {
 
-            var self = new lazlo();
+            var self = new lli();
             
             document.addEventListener(document, "DOMContentLoaded");  //Dom parsing is finished
             document.addEventListener(window, "load"); //loading of all external stuff is done
@@ -101,14 +106,14 @@
         /**
          * Return main instance
          */
-        return lazlo;
+        return lli;
 
     };
 
     /**
-     * Create lazlo instance
+     * Create lli instance
      */
-    var lazloExport = typeof global.document === "object" ? factory(global) : factory;
+    var lliExport = typeof global.document === "object" ? factory(global) : factory;
 
 
     /**
@@ -117,7 +122,7 @@
     if (typeof define === "function" && define.amd) {
 
         define(function () {
-            return lazloExport;
+            return lliExport;
         });
 
     /**
@@ -129,20 +134,20 @@
         * Support Node.js specific `module.exports` (which can be a function)
         */
         if (typeof module === "object" && typeof module.exports === "object") {
-            exports = module.exports = lazloExport;
+            exports = module.exports = lliExport;
         }
 
        /**
         * But always support CommonJS module 1.1.1 spec (`exports` cannot be a function)
         */
-        exports.lazlo = lazloExport;
+        exports.lli = lliExport;
 
     /**
      * Native JS export
      */
     } else {
 
-        global.lazlo = lazloExport;
+        global.lli = lliExport;
     }
 
 })(typeof window === "undefined" ? this : window);
