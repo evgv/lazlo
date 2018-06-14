@@ -1,9 +1,9 @@
 {
-  "name": "lazlo",
+  "name": "lli",
   "version": "0.1.0",
   "description": "",
-  "main": "src/build/lazlo.js",
-  "repository": "https://github.com/evgv/lazlo.git",
+  "main": "src/build/lli.js",
+  "repository": "https://github.com/evgv/lli.git",
   "author": "evgv",
   "license": "MIT",
   "devDependencies": {
