@@ -1,3 +1,3 @@
-# LazloJs
+# Lazy Load Image (lli)
 
-Small client-side image lazy load plugin.
+Small client-side images lazy load plugin.
